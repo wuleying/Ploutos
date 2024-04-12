@@ -7,7 +7,7 @@ from typing import Dict, Optional
 from playwright.async_api import BrowserContext, BrowserType
 
 
-class AbstractPloutos(ABC):
+class AbstractCrawler(ABC):
     @abstractmethod
     def init_config(self, platform: str, login_type: str, target_type: str):
         pass
@@ -26,4 +26,42 @@ class AbstractPloutos(ABC):
                              playwright_proxy: Optional[Dict],
                              user_agent: Optional[str],
                              headless: bool = True) -> BrowserContext:
+        pass
+
+
+class AbstractLogin(ABC):
+    @abstractmethod
+    async def begin(self):
+        pass
+
+    @abstractmethod
+    async def login_by_qrcode(self):
+        pass
+
+    @abstractmethod
+    async def login_by_mobile(self):
+        pass
+
+    @abstractmethod
+    async def login_by_cookies(self):
+        pass
+
+
+class AbstractStore(ABC):
+    @abstractmethod
+    async def store_content(self, content_item: Dict):
+        pass
+
+
+class AbstractApiClient(ABC):
+    @abstractmethod
+    async def request(self, method, url, **kwargs):
+        pass
+
+    @abstractmethod
+    async def update_cookies(self, browser_context: BrowserContext):
+        pass
+
+    @abstractmethod
+    async def pong(self):
         pass
