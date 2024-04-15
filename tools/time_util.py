@@ -29,26 +29,26 @@ def get_current_date() -> str:
     return time.strftime('%Y-%m-%d', time.localtime())
 
 
-def get_time_str_from_unix_time(unixtime):
+def get_time_str_from_unix_time(unix_time):
     """
     unix 整数类型时间戳  ==> 字符串日期时间
-    :param unixtime:
+    :param unix_time:
     :return:
     """
-    if int(unixtime) > 1000000000000:
-        unixtime = int(unixtime) / 1000
-    return time.strftime('%Y-%m-%d %X', time.localtime(unixtime))
+    if int(unix_time) > 1000000000000:
+        unix_time = int(unix_time) / 1000
+    return time.strftime('%Y-%m-%d %X', time.localtime(unix_time))
 
 
-def get_date_str_from_unix_time(unixtime):
+def get_date_str_from_unix_time(unix_time):
     """
     unix 整数类型时间戳  ==> 字符串日期
-    :param unixtime:
+    :param unix_time:
     :return:
     """
-    if int(unixtime) > 1000000000000:
-        unixtime = int(unixtime) / 1000
-    return time.strftime('%Y-%m-%d', time.localtime(unixtime))
+    if int(unix_time) > 1000000000000:
+        unix_time = int(unix_time) / 1000
+    return time.strftime('%Y-%m-%d', time.localtime(unix_time))
 
 
 def get_unix_time_from_time_str(time_str):
