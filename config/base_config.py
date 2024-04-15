@@ -20,3 +20,6 @@ HEADLESS = True
 
 # 是否保存登录状态
 SAVE_LOGIN_STATE = True
+
+# mysql配置
+RELATION_DB_URL = ""
