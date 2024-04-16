@@ -5,8 +5,8 @@ PLATFORM = "xueqiu"
 LOGIN_TYPE = "qrcode"
 # cookies
 COOKIES = ""
-# 爬取类型，search(关键词搜索)
-CRAWLER_TYPE = "search"
+# 爬取类型 stock: 股票
+CRAWLER_TYPE = "stock"
 
 # 是否开启 IP 代理
 ENABLE_IP_PROXY = False

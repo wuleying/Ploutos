@@ -18,7 +18,7 @@ class XueQiuCrawler(AbstractCrawler):
     browser_context: BrowserContext
 
     def init_config(self, platform: str, login_type: str, target_type: str):
-        print("Init xueqiu crawler")
+        print("Init xueqiu crawler, platform: %s, login_type: %s, target_type: %s" % (platform, login_type, target_type))
         pass
 
     async def start(self):

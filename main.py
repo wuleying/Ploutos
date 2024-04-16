@@ -32,8 +32,8 @@ async def main():
                         choices=["xueqiu"], default=config.PLATFORM)
     parser.add_argument('--lt', type=str, help='Login type (qrcode | phone | cookie)',
                         choices=["qrcode", "phone", "cookie"], default=config.LOGIN_TYPE)
-    parser.add_argument('--type', type=str, help='crawler type (search)',
-                        choices=["search"], default=config.CRAWLER_TYPE)
+    parser.add_argument('--type', type=str, help='crawler type (stock)',
+                        choices=["stock"], default=config.CRAWLER_TYPE)
 
     args = parser.parse_args()
     crawler = CrawlerFactory.create_crawler(platform=args.platform)
