@@ -9,13 +9,13 @@ from base.base_crawler import AbstractApiClient
 class XueQiuClient(AbstractApiClient):
 
     def __init__(
-            self,
-            timeout=10,
-            proxies=None,
-            *,
-            headers: Dict[str, str],
-            playwright_page: Page,
-            cookie_dict: Dict[str, str],
+        self,
+        timeout=10,
+        proxies=None,
+        *,
+        headers: Dict[str, str],
+        playwright_page: Page,
+        cookie_dict: Dict[str, str],
     ):
         self.proxies = proxies
         self.timeout = timeout

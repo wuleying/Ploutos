@@ -20,11 +20,13 @@ class AbstractCrawler(ABC):
         pass
 
     @abstractmethod
-    async def launch_browser(self,
-                             chromium: BrowserType,
-                             playwright_proxy: Optional[Dict],
-                             user_agent: Optional[str],
-                             headless: bool = True) -> BrowserContext:
+    async def launch_browser(
+        self,
+        chromium: BrowserType,
+        playwright_proxy: Optional[Dict],
+        user_agent: Optional[str],
+        headless: bool = True,
+    ) -> BrowserContext:
         pass
 
 

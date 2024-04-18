@@ -7,13 +7,14 @@ from playwright.async_api import BrowserContext, Page
 
 
 class XueQiuLogin(AbstractLogin):
-    def __init__(self,
-                 login_type: str,
-                 browser_context: BrowserContext,
-                 context_page: Page,
-                 login_phone: Optional[str] = "",
-                 cookie_str: str = ""
-                 ):
+    def __init__(
+        self,
+        login_type: str,
+        browser_context: BrowserContext,
+        context_page: Page,
+        login_phone: Optional[str] = "",
+        cookie_str: str = "",
+    ):
         self.login_type = login_type
         self.browser_context = browser_context
         self.context_page = context_page

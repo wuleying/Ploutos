@@ -14,7 +14,7 @@ from .types import IpInfoModel
 
 
 class IpGetError(Exception):
-    """ ip get error"""
+    """ip get error"""
 
 
 class ProxyProvider(ABC):
@@ -30,7 +30,9 @@ class ProxyProvider(ABC):
 
 class RedisDbIpCache:
     def __init__(self):
-        self.redis_client = redis.Redis(host=config.REDIS_DB_HOST, password=config.REDIS_DB_PWD)
+        self.redis_client = redis.Redis(
+            host=config.REDIS_DB_HOST, password=config.REDIS_DB_PWD
+        )
 
     def set_ip(self, ip_key: str, ip_value_info: str, ex: int):
         """
@@ -49,7 +51,9 @@ class RedisDbIpCache:
         :return:
         """
         all_ip_list: List[IpInfoModel] = []
-        all_ip_keys: List[bytes] = self.redis_client.keys(pattern=f"{proxy_brand_name}_*")
+        all_ip_keys: List[bytes] = self.redis_client.keys(
+            pattern=f"{proxy_brand_name}_*"
+        )
         try:
             for ip_key in all_ip_keys:
                 ip_value = self.redis_client.get(ip_key)
@@ -57,5 +61,7 @@ class RedisDbIpCache:
                     continue
                 all_ip_list.append(IpInfoModel(**json.loads(ip_value)))
         except Exception as e:
-            utils.logger.error("[RedisDbIpCache.load_all_ip] get ip err from redis db", e)
+            utils.logger.error(
+                "[RedisDbIpCache.load_all_ip] get ip err from redis db", e
+            )
         return all_ip_list

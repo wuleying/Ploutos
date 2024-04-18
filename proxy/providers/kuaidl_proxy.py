@@ -34,7 +34,7 @@ def parse_kuaidaili_proxy(proxy_info: str) -> KuaidailiProxyModel:
     if len(proxies) != 2:
         raise Exception("not invalid kuaidaili proxy info")
 
-    pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5}),(\d+)'
+    pattern = r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5}),(\d+)"
     match = re.search(pattern, proxy_info)
     if not match.groups():
         raise Exception("not match kuaidaili proxy info")
@@ -42,12 +42,18 @@ def parse_kuaidaili_proxy(proxy_info: str) -> KuaidailiProxyModel:
     return KuaidailiProxyModel(
         ip=match.groups()[0],
         port=int(match.groups()[1]),
-        expire_ts=int(match.groups()[2])
+        expire_ts=int(match.groups()[2]),
     )
 
 
 class KuaiDaiLiProxy(ProxyProvider):
-    def __init__(self, kdl_user_name: str, kdl_user_pwd: str, kdl_secret_id: str, kdl_signature: str):
+    def __init__(
+        self,
+        kdl_user_name: str,
+        kdl_user_pwd: str,
+        kdl_secret_id: str,
+        kdl_signature: str,
+    ):
         """
 
         Args:
@@ -82,7 +88,9 @@ class KuaiDaiLiProxy(ProxyProvider):
         uri = "/api/getdps/"
 
         # 优先从缓存中拿 IP
-        ip_cache_list = self.ip_cache.load_all_ip(proxy_brand_name=self.proxy_brand_name)
+        ip_cache_list = self.ip_cache.load_all_ip(
+            proxy_brand_name=self.proxy_brand_name
+        )
         if len(ip_cache_list) >= num:
             return ip_cache_list[:num]
 
@@ -95,12 +103,18 @@ class KuaiDaiLiProxy(ProxyProvider):
             response = await client.get(self.api_base + uri, params=self.params)
 
             if response.status_code != 200:
-                utils.logger.error(f"[KuaiDaiLiProxy.get_proxies] statuc code not 200 and response.txt:{response.text}")
-                raise Exception("get ip error from proxy provider and status code not 200 ...")
+                utils.logger.error(
+                    f"[KuaiDaiLiProxy.get_proxies] statuc code not 200 and response.txt:{response.text}"
+                )
+                raise Exception(
+                    "get ip error from proxy provider and status code not 200 ..."
+                )
 
             ip_response: Dict = response.json()
             if ip_response.get("code") != 0:
-                utils.logger.error(f"[KuaiDaiLiProxy.get_proxies]  code not 0 and msg:{ip_response.get('msg')}")
+                utils.logger.error(
+                    f"[KuaiDaiLiProxy.get_proxies]  code not 0 and msg:{ip_response.get('msg')}"
+                )
                 raise Exception("get ip error from proxy provider and  code not 0 ...")
 
             proxy_list: List[str] = ip_response.get("data", {}).get("proxy_list")
@@ -112,10 +126,15 @@ class KuaiDaiLiProxy(ProxyProvider):
                     user=self.kdl_user_name,
                     password=self.kdl_user_pwd,
                     expired_time_ts=proxy_model.expire_ts,
-
                 )
-                ip_key = f"{self.proxy_brand_name}_{ip_info_model.ip}_{ip_info_model.port}"
-                self.ip_cache.set_ip(ip_key, ip_info_model.model_dump_json(), ex=ip_info_model.expired_time_ts)
+                ip_key = (
+                    f"{self.proxy_brand_name}_{ip_info_model.ip}_{ip_info_model.port}"
+                )
+                self.ip_cache.set_ip(
+                    ip_key,
+                    ip_info_model.model_dump_json(),
+                    ex=ip_info_model.expired_time_ts,
+                )
                 ip_infos.append(ip_info_model)
 
         return ip_cache_list + ip_infos

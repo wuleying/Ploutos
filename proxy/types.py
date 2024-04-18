@@ -15,6 +15,7 @@ class ProviderNameEnum(Enum):
 
 class IpInfoModel(BaseModel):
     """Unified IP model"""
+
     ip: str = Field(title="ip")
     port: int = Field(title="端口")
     user: str = Field(title="IP代理认证的用户名")
