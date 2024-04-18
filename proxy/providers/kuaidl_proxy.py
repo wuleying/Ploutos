@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-# @Desc    : 快代理HTTP实现，官方文档：https://www.kuaidaili.com/?ref=ldwkjqipvz6c
+# @Author : luoliang
+# @Time   : 2024/4/18 08:24
+# @Desc   : 快代理HTTP实现，官方文档：https://www.kuaidaili.com/?ref=ldwkjqipvz6c
 
 import os
 import re
-import httpx
-
-from pydantic import BaseModel, Field
 from typing import Dict, List
+
+import httpx
+from pydantic import BaseModel, Field
+
 from proxy import IpGetError, IpInfoModel, ProxyProvider, RedisDbIpCache
 from proxy.types import ProviderNameEnum
 from tools import utils
@@ -125,7 +128,7 @@ def new_kuai_daili_proxy() -> KuaiDaiLiProxy:
 
     """
     return KuaiDaiLiProxy(
-        kdl_secret_id=os.getenv("kdl_secret_id", "你的快代理secert_id"),
+        kdl_secret_id=os.getenv("kdl_secret_id", "你的快代理secret_id"),
         kdl_signature=os.getenv("kdl_signature", "你的快代理签名"),
         kdl_user_name=os.getenv("kdl_user_name", "你的快代理用户名"),
         kdl_user_pwd=os.getenv("kdl_user_pwd", "你的快代理密码"),

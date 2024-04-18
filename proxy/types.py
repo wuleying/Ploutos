@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+# @Author : luoliang
+# @Time   : 2024/4/18 08:22
+# @Desc   : 基础类型
 
 from enum import Enum
 from typing import Optional
-
 from pydantic import BaseModel, Field
 
 

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
+# @Author : luoliang
+# @Time   : 2024/4/18 08:21
+# @Desc   : 实现极速HTTP的接口，官网地址：https://www.jisuhttp.com/?pl=mAKphQ&plan=ZY&kd=Yang
 
 import json
 import redis
 import config
 
 from abc import ABC, abstractmethod
-from typing import Dict, List
+from typing import List
 from tools import utils
 from .types import IpInfoModel
 

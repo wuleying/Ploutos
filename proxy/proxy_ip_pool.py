@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# @Author : luoliang
+# @Time   : 2024/4/18 08:22
+# @Desc   : IP代理池实现
 
 import random
 from typing import Dict, List
@@ -23,7 +26,8 @@ class ProxyIpPool:
             enable_validate_ip:
             ip_provider:
         """
-        self.valid_ip_url = "https://httpbin.org/ip"  # 验证 IP 是否有效的地址
+        # 验证 IP 是否有效的地址
+        self.valid_ip_url = "https://httpbin.org/ip"
         self.ip_pool_count = ip_pool_count
         self.enable_validate_ip = enable_validate_ip
         self.proxy_list: List[IpInfoModel] = []

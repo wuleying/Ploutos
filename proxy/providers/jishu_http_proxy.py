@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-# @Desc: 极速HTTP代理提供类实现,官网地址：https://www.jisuhttp.com?pl=zG3Jna
+# @Author : luoliang
+# @Time   : 2024/4/18 08:23
+# @Desc   : 极速HTTP代理提供类实现,官网地址：https://www.jisuhttp.com?pl=zG3Jna
 
 import os
-import httpx
-
 from typing import Dict, List
 from urllib.parse import urlencode
+
+import httpx
+
 from proxy import IpGetError, ProxyProvider, RedisDbIpCache
 from proxy.types import IpInfoModel
 from tools import utils
