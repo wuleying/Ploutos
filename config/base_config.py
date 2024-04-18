@@ -23,3 +23,7 @@ SAVE_LOGIN_STATE = True
 
 # mysql配置
 RELATION_DB_URL = ""
+
+# redis配置
+REDIS_DB_HOST = ""
+REDIS_DB_PWD = ""
