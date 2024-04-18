@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# @Author : luoliang
+# @Time   : 2024/4/18 08:21
+# @Desc   : 时间相关的工具函数
 
 import time
 from datetime import datetime, timedelta, timezone
@@ -28,26 +31,26 @@ def get_current_date() -> str:
     return time.strftime("%Y-%m-%d", time.localtime())
 
 
-def get_time_str_from_unix_time(unix_time):
+def get_time_str_from_unix_time(unixtime):
     """
     unix 整数类型时间戳  ==> 字符串日期时间
-    :param unix_time:
+    :param unixtime:
     :return:
     """
-    if int(unix_time) > 1000000000000:
-        unix_time = int(unix_time) / 1000
-    return time.strftime("%Y-%m-%d %X", time.localtime(unix_time))
+    if int(unixtime) > 1000000000000:
+        unixtime = int(unixtime) / 1000
+    return time.strftime("%Y-%m-%d %X", time.localtime(unixtime))
 
 
-def get_date_str_from_unix_time(unix_time):
+def get_date_str_from_unix_time(unixtime):
     """
     unix 整数类型时间戳  ==> 字符串日期
-    :param unix_time:
+    :param unixtime:
     :return:
     """
-    if int(unix_time) > 1000000000000:
-        unix_time = int(unix_time) / 1000
-    return time.strftime("%Y-%m-%d", time.localtime(unix_time))
+    if int(unixtime) > 1000000000000:
+        unixtime = int(unixtime) / 1000
+    return time.strftime("%Y-%m-%d", time.localtime(unixtime))
 
 
 def get_unix_time_from_time_str(time_str):

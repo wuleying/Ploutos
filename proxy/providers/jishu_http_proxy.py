@@ -4,14 +4,13 @@
 # @Desc   : 极速HTTP代理提供类实现,官网地址：https://www.jisuhttp.com?pl=zG3Jna
 
 import os
-from typing import Dict, List
-from urllib.parse import urlencode
-
 import httpx
 
+from typing import Dict, List
+from urllib.parse import urlencode
 from proxy import IpGetError, ProxyProvider, RedisDbIpCache
 from proxy.types import IpInfoModel
-from tools import utils
+from tools import utils, time_util
 
 
 class JiSuHttpProxy(ProxyProvider):
@@ -63,14 +62,14 @@ class JiSuHttpProxy(ProxyProvider):
             res_dict: Dict = response.json()
             if res_dict.get("code") == 0:
                 data: List[Dict] = res_dict.get("data")
-                current_ts = utils.get_unix_timestamp()
+                current_ts = time_util.get_unix_timestamp()
                 for ip_item in data:
                     ip_info_model = IpInfoModel(
                         ip=ip_item.get("ip"),
                         port=ip_item.get("port"),
                         user=ip_item.get("user"),
                         password=ip_item.get("pass"),
-                        expired_time_ts=utils.get_unix_time_from_time_str(
+                        expired_time_ts=time_util.get_unix_time_from_time_str(
                             ip_item.get("expire")
                         ),
                     )
@@ -81,7 +80,7 @@ class JiSuHttpProxy(ProxyProvider):
                         ip_key, ip_value, ex=ip_info_model.expired_time_ts - current_ts
                     )
             else:
-                raise IpGetError(res_dict.get("msg", "unkown err"))
+                raise IpGetError(res_dict.get("msg", "unknown err"))
         return ip_cache_list + ip_infos
 
 
@@ -92,9 +91,10 @@ def new_jisu_http_proxy() -> JiSuHttpProxy:
 
     """
     return JiSuHttpProxy(
-        key=os.getenv("jisu_key", ""),  # 通过环境变量的方式获取极速HTTPIP提取key值
-        crypto=os.getenv(
-            "jisu_crypto", ""
-        ),  # 通过环境变量的方式获取极速HTTPIP提取加密签名
-        time_validity_period=30,  # 30分钟（最长时效）
+        # 通过环境变量的方式获取极速HTTPIP提取key值
+        key=os.getenv("jisu_key", ""),
+        # 通过环境变量的方式获取极速HTTPIP提取加密签名
+        crypto=os.getenv("jisu_crypto", ""),
+        # 30分钟（最长时效）
+        time_validity_period=30,
     )
