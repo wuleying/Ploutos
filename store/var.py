@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from contextvars import ContextVar
-from async_db import AsyncMysqlDB
 import aiomysql
+import contextvars
 
-ploutos_db_var: ContextVar[AsyncMysqlDB] = ContextVar("ploutos_db_var")
-db_conn_pool_var: ContextVar[aiomysql.Pool] = ContextVar("db_conn_pool_var")
+from async_db import AsyncMysqlDB
+
+
+ploutos_db_var: contextvars.ContextVar[AsyncMysqlDB] = contextvars.ContextVar(
+    "ploutos_db_var"
+)
+db_conn_pool_var: contextvars.ContextVar[aiomysql.Pool] = contextvars.ContextVar(
+    "db_conn_pool_var"
+)

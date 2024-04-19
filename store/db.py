@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import asyncio
+import aiomysql
+import config
+
 from typing import Dict
 from urllib.parse import urlparse
-
-import aiomysql
-
-import config
 from async_db import AsyncMysqlDB
 from tools import utils
 from .var import db_conn_pool_var, ploutos_db_var

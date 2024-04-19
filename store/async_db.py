@@ -91,7 +91,7 @@ class AsyncMysqlDB:
 
     async def execute(self, sql: str, *args: Union[str, int]) -> int:
         """
-        需要更新、写入等操作的 excute 执行语句
+        需要更新、写入等操作的 execute 执行语句
         :param sql:
         :param args:
         :return:
