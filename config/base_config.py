@@ -27,3 +27,7 @@ RELATION_DB_URL = ""
 # redis配置
 REDIS_DB_HOST = ""
 REDIS_DB_PWD = ""
+
+# 数据保存类型选项配置,支持三种类型：csv、db、json
+# csv or db or json
+SAVE_DATA_OPTION = "json"
