@@ -28,6 +28,11 @@ class XueqiuCsvStoreImplement(AbstractStore):
         pass
 
 
-class XueQiuDbStoreImplement(AbstractStore):
+class XueqiuDbStoreImplement(AbstractStore):
+    async def store_content(self, content_item: Dict):
+        pass
+
+
+class XueqiuJsonStoreImplement(AbstractStore):
     async def store_content(self, content_item: Dict):
         pass

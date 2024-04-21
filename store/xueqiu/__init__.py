@@ -5,15 +5,16 @@
 
 import config
 
-from typing import List
-
-from base.base_crawler import AbstractStore
 from . import xueqiu_store_impl
 from .xueqiu_store_impl import *
 
 
 class XueqiuStoreFactory:
-    STORES = {"db": "", "json": "", "csv": ""}
+    STORES = {
+        "csv": "XueqiuCsvStoreImplement",
+        "db": "XueqiuDbStoreImplement",
+        "json": "XueqiuJsonStoreImplement",
+    }
 
     @staticmethod
     def create_store() -> AbstractStore:
